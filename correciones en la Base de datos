@@ -1,1 +1,6 @@
+En la Tabla de productos agregar unidades de medida 
+  *Unidades (Piezas/Cantidad): Pieza, Docena, Par, Caja, unidades.
+  *Peso (Masa): Kilogramo (kg), Gramo (g), Miligramo (mg), Tonelada, Libra, Onza.
+  *Volumen/Capacidad: Litro (l), Mililitro (ml), Centímetro cúbico, Galón, Onza líquida.
 
+En la tabla de proveedor cambiar id por RFC
