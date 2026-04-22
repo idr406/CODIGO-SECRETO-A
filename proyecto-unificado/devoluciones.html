@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Devoluciones - Dulcería Lupita</title>
+    <style>
+        :root {
+            --bg-azul: oklch(82.8% 0.111 230.318);
+            --texto-amarillo: oklch(94.5% 0.129 101.54);
+            --btn-rosita: oklch(89.9% 0.061 343.231);
+        }
+        body { background-color: var(--bg-azul); }
+        .text-amarillo { color: var(--texto-amarillo); }
+        .bg-rosita { background-color: var(--btn-rosita); color: oklch(0% 0 0); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col items-center p-4">
+
+    <h1 class="text-5xl md:text-7xl font-black text-amarillo mb-8 drop-shadow-md text-center mt-8">
+        "DULCERIA LUPITA"
+    </h1>
+
+    <main class="bg-white/90 backdrop-blur-sm rounded-[2rem] shadow-2xl overflow-hidden max-w-5xl w-full border-8 border-white p-8">
+        <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+            <div>
+                <h2 class="text-3xl font-bold text-pink-300 mb-2">Devoluciones</h2>
+                <p class="text-gray-500">Registra y gestiona las devoluciones de productos</p>
+            </div>
+            <a href="admin.html" class="bg-rosita px-6 py-2 rounded-full font-bold shadow-md hover:brightness-95 transition-all text-sm">
+                Volver al menu
+            </a>
+        </div>
+
+        <!-- Formulario de Registro -->
+        <div class="bg-gradient-to-br from-blue-50 to-white rounded-2xl p-6 border border-blue-100 mb-8">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Registrar Devolucion</h3>
+            <form id="devolucion-form">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-4">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-600 mb-1 ml-2">Proveedor</label>
+                        <select id="proveedor" class="w-full px-4 py-2 rounded-full border-2 border-gray-100 focus:border-blue-200 outline-none transition-all bg-white">
+                            <option value="">Seleccionar proveedor</option>
+                            <option value="1">Proveedor A</option>
+                            <option value="2">Proveedor B</option>
+                            <option value="3">Proveedor C</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-600 mb-1 ml-2">Producto</label>
+                        <select id="producto" class="w-full px-4 py-2 rounded-full border-2 border-gray-100 focus:border-blue-200 outline-none transition-all bg-white">
+                            <option value="">Seleccionar producto</option>
+                            <option value="1">Dulces variados</option>
+                            <option value="2">Chocolates</option>
+                            <option value="3">Galletas</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-600 mb-1 ml-2">Cantidad</label>
+                        <input type="number" id="cantidad" placeholder="Cantidad" class="w-full px-4 py-2 rounded-full border-2 border-gray-100 focus:border-blue-200 outline-none transition-all">
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-600 mb-1 ml-2">Motivo</label>
+                        <select id="motivo" class="w-full px-4 py-2 rounded-full border-2 border-gray-100 focus:border-blue-200 outline-none transition-all bg-white">
+                            <option value="">Seleccionar motivo</option>
+                            <option value="Producto dañado">Producto danado</option>
+                            <option value="Producto vencido">Producto vencido</option>
+                            <option value="Error en pedido">Error en pedido</option>
+                            <option value="Calidad deficiente">Calidad deficiente</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-600 mb-1 ml-2">Sucursal</label>
+                        <select id="sucursal" class="w-full px-4 py-2 rounded-full border-2 border-gray-100 focus:border-blue-200 outline-none transition-all bg-white">
+                            <option value="">Seleccionar sucursal</option>
+                            <option value="1">Sucursal Centro</option>
+                            <option value="2">Sucursal Norte</option>
+                            <option value="3">Sucursal Sur</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-bold text-gray-600 mb-1 ml-2">Usuario</label>
+                        <select id="usuario" class="w-full px-4 py-2 rounded-full border-2 border-gray-100 focus:border-blue-200 outline-none transition-all bg-white">
+                            <option value="">Seleccionar usuario</option>
+                            <option value="1">Admin</option>
+                            <option value="2">Empleado 1</option>
+                            <option value="3">Empleado 2</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="bg-rosita px-8 py-3 rounded-full font-bold shadow-md hover:brightness-95 transition-all uppercase tracking-widest active:scale-95">
+                    Registrar Devolucion
+                </button>
+            </form>
+        </div>
+
+        <!-- Lista de Devoluciones -->
+        <div class="bg-gradient-to-br from-pink-50 to-white rounded-2xl p-6 border border-pink-100">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-bold text-gray-800">Lista de Devoluciones</h3>
+                <button onclick="cargarDevoluciones()" class="bg-gray-200 px-4 py-2 rounded-full font-bold shadow hover:brightness-95 transition-all text-sm">
+                    Actualizar
+                </button>
+            </div>
+
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-pink-100">
+                            <th class="px-4 py-3 text-left text-sm font-bold text-gray-700 rounded-tl-xl">Folio</th>
+                            <th class="px-4 py-3 text-left text-sm font-bold text-gray-700">Proveedor</th>
+                            <th class="px-4 py-3 text-left text-sm font-bold text-gray-700">Producto</th>
+                            <th class="px-4 py-3 text-left text-sm font-bold text-gray-700">Cantidad</th>
+                            <th class="px-4 py-3 text-left text-sm font-bold text-gray-700">Motivo</th>
+                            <th class="px-4 py-3 text-left text-sm font-bold text-gray-700">Estado</th>
+                            <th class="px-4 py-3 text-left text-sm font-bold text-gray-700">Fecha</th>
+                            <th class="px-4 py-3 text-left text-sm font-bold text-gray-700 rounded-tr-xl">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-devoluciones" class="divide-y divide-gray-100">
+                        <tr>
+                            <td colspan="8" class="px-4 py-8 text-center text-gray-400">No hay devoluciones registradas</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+<script>
+let devoluciones = [];
+let contadorFolio = 1;
+
+document.getElementById('devolucion-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    registrarDevolucion();
+});
+
+function registrarDevolucion() {
+    const proveedor = document.getElementById('proveedor');
+    const producto = document.getElementById('producto');
+    const cantidad = document.getElementById('cantidad').value;
+    const motivo = document.getElementById('motivo').value;
+    const sucursal = document.getElementById('sucursal');
+    const usuario = document.getElementById('usuario');
+
+    if (!proveedor.value || !producto.value || !cantidad || !motivo || !sucursal.value || !usuario.value) {
+        alert('Por favor completa todos los campos');
+        return;
+    }
+
+    const devolucion = {
+        id: contadorFolio++,
+        folio: 'DEV-' + String(contadorFolio).padStart(4, '0'),
+        proveedor: proveedor.options[proveedor.selectedIndex].text,
+        producto: producto.options[producto.selectedIndex].text,
+        cantidad: parseInt(cantidad),
+        motivo: motivo,
+        sucursal: sucursal.options[sucursal.selectedIndex].text,
+        usuario: usuario.options[usuario.selectedIndex].text,
+        estado: 'Registrada',
+        fecha: new Date().toLocaleDateString('es-MX')
+    };
+
+    devoluciones.push(devolucion);
+    document.getElementById('devolucion-form').reset();
+    alert('Devolucion registrada correctamente');
+    cargarDevoluciones();
+}
+
+function cargarDevoluciones() {
+    const tbody = document.getElementById('tabla-devoluciones');
+    
+    if (devoluciones.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" class="px-4 py-8 text-center text-gray-400">No hay devoluciones registradas</td></tr>';
+        return;
+    }
+
+    tbody.innerHTML = devoluciones.map(d => `
+        <tr class="hover:bg-pink-50 transition-all">
+            <td class="px-4 py-3 text-sm font-semibold text-pink-500">${d.folio}</td>
+            <td class="px-4 py-3 text-sm text-gray-700">${d.proveedor}</td>
+            <td class="px-4 py-3 text-sm text-gray-700">${d.producto}</td>
+            <td class="px-4 py-3 text-sm text-gray-700">${d.cantidad}</td>
+            <td class="px-4 py-3 text-sm text-gray-700">${d.motivo}</td>
+            <td class="px-4 py-3">
+                <select onchange="cambiarEstado(${d.id}, this.value)" class="px-3 py-1 rounded-full text-xs font-semibold bg-gray-100 border-0 focus:ring-2 focus:ring-pink-200 outline-none">
+                    <option value="Registrada" ${d.estado === 'Registrada' ? 'selected' : ''}>Registrada</option>
+                    <option value="En proceso" ${d.estado === 'En proceso' ? 'selected' : ''}>En proceso</option>
+                    <option value="Completada" ${d.estado === 'Completada' ? 'selected' : ''}>Completada</option>
+                    <option value="Cancelada" ${d.estado === 'Cancelada' ? 'selected' : ''}>Cancelada</option>
+                </select>
+            </td>
+            <td class="px-4 py-3 text-sm text-gray-500">${d.fecha}</td>
+            <td class="px-4 py-3">
+                <button onclick="eliminarDevolucion(${d.id})" class="bg-red-400 text-white px-3 py-1 rounded-full text-xs font-bold hover:brightness-95 transition-all">
+                    Eliminar
+                </button>
+            </td>
+        </tr>
+    `).join('');
+}
+
+function cambiarEstado(id, nuevoEstado) {
+    const devolucion = devoluciones.find(d => d.id === id);
+    if (devolucion) {
+        devolucion.estado = nuevoEstado;
+        alert('Estado actualizado');
+        cargarDevoluciones();
+    }
+}
+
+function eliminarDevolucion(id) {
+    if (confirm('Estas seguro de eliminar esta devolucion?')) {
+        devoluciones = devoluciones.filter(d => d.id !== id);
+        alert('Devolucion eliminada');
+        cargarDevoluciones();
+    }
+}
+
+cargarDevoluciones();
+</script>
+
+</body>
+</html>
